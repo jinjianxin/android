@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/myTableLayout"
+    android:background="@drawable/background"
+    >
+    
+    <TableRow >
+        <ImageButton 
+            android:id="@+id/allMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/all"
+            android:padding="140dip"
+            android:paddingRight="50dip"
+            />
+        
+        <ImageButton 
+            android:id="@+id/albumMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/album"
+            android:padding="140dip"
+            android:paddingRight="50dip"
+            />
+        
+        <ImageButton 
+            android:id="@+id/signerMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/singer"
+            android:padding="140dip"
+            android:paddingRight="50dip"
+            />
+    </TableRow>
+    
+    <TableRow >
+       <ImageButton 
+           android:id="@+id/playList"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/list"
+           android:padding="140dip"
+           android:paddingRight="50dip"
+           />
+       
+       <ImageButton 
+           android:id="@+id/storageMusic"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/mobile_equipment"
+           android:padding="140dip"
+           android:paddingRight="50dip"
+           />
+       
+       <ImageButton 
+           android:id="@+id/collectMusic"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/collection"
+           android:padding="140dip"
+           android:paddingRight="50dip"
+           />
+        
+    </TableRow>
+    
+</TableLayout>
