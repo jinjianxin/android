@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<RelativeLayout     
+         android:layout_width="fill_parent"     
+         xmlns:android="http://schemas.android.com/apk/res/android"     
+         android:layout_height="wrap_content"
+         android:descendantFocusability="blocksDescendants"
+         >
+             
+         <ImageView     
+               android:layout_width="wrap_content"     
+               android:id="@+id/albumImage" 
+               android:layout_height="fill_parent"
+               android:src="@drawable/defaultalbum"
+               >     
+         </ImageView>    
+
+                  
+         <TextView 
+               android:text="@string/noName"     
+               android:layout_height="wrap_content"     
+               android:layout_width="wrap_content"     
+               android:id="@+id/fileName" 
+               android:layout_toRightOf="@+id/albumImage" 
+               android:textSize="20sp"/>   
+
+                        
+         <TextView 
+             android:id="@+id/signerName"
+             android:text="@string/noName"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_toRightOf="@+id/albumImage"
+             android:layout_below="@+id/fileName"
+             android:textSize="20sp"
+             />
+         
+         <TextView 
+             android:id="@+id/duringTime"
+             android:text="@string/noName"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_centerInParent="true"
+             android:layout_alignParentRight="true"
+             android:textSize="20sp"
+             />
+         
+         <ImageButton 
+             android:id="@+id/collectButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/unfavoliten"
+             android:layout_toLeftOf="@+id/duringTime"
+             android:adjustViewBounds="true"
+             android:padding="0dip"
+             android:layout_centerInParent="true"
+             />
+  
+</RelativeLayout>  
