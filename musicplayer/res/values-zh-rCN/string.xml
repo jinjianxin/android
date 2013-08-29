@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">音乐播放器</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="noName">未知</string>
+    <string name="MainActivity">播放器</string>
+    <string name="ListActivity">全部音乐</string>
+    <string name="PlayActivity">正在播放</string>
+    <string name="allMusic">全部音乐</string>
+	<string name="album">专辑</string>
+	<string name="singer">歌手</string>
+	<string name="playList">播放列表</string>
+	<string name="storge">外部设备</string>
+	<string name="collect">收藏</string>
+</resources>
