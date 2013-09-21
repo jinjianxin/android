@@ -1,0 +1,37 @@
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <ListView
+        android:id="@+id/playlist_dialog_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        >
+
+    </ListView>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+         >
+
+        <Button
+            android:id="@+id/playlist_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/remove_dialog_cancel"
+             />
+
+        <Button
+            android:id="@+id/playlist_newlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" 
+            android:text="@string/new_list"
+            />
+    </LinearLayout>
+    
+</LinearLayout>

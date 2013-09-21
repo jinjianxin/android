@@ -1,0 +1,75 @@
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <TextView
+        android:id="@+id/remove_dialog_tip"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="25dp"
+        android:text="test"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
+
+        <CheckBox
+            android:id="@+id/remove_dialog_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="30dp"
+            android:layout_weight="7"
+             />
+        
+        <TextView 
+            android:id="@+id/remove_dialog_text"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+        	android:text="@string/remove_tip"
+        	android:textSize="25sp" 
+        	android:gravity="center_vertical"
+            />
+        
+    </LinearLayout>
+    
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="?android:attr/listDivider" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/remove_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" 
+            android:text="@string/remove_dialog_cancel"
+            />
+
+        <Button
+            android:id="@+id/remove_dialog_surce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" 
+            android:text="@string/remove_dialog_surce"
+            />
+    </LinearLayout>
+    
+</LinearLayout>
