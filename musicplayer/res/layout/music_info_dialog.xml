@@ -1,0 +1,212 @@
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/music"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        />
+    
+        <TextView
+        android:id="@+id/music_info_file"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/noName"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        />
+    
+	</LinearLayout>
+	
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/music_info_singer"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        />
+    
+        <TextView
+        android:id="@+id/music_info_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/noName"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        />
+    
+	</LinearLayout>
+	
+                <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/music_info_album"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        />
+    
+        <TextView
+        android:id="@+id/music_info_album"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" 
+        android:text="@string/noName"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        />
+    
+	</LinearLayout>
+	
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="?android:attr/listDivider"
+         />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/music_length"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/length"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/music_size"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/size"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+    
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/music_format"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/format"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/music_year"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/year"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+    
+                <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/music_bit"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/bit"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/music_channels"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textSize="20sp" 
+            android:text="@string/channels"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+    
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/music_sample_rate"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="20sp" 
+            android:text="@string/sample_rate"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+
+    </LinearLayout>
+    
+            <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="?android:attr/listDivider"
+         />
+            
+                    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/music_path"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="20sp" 
+            android:text="@string/path"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
