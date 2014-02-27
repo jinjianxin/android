@@ -1,0 +1,84 @@
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+   	android:background="#FF54FF9F"
+    
+    >
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/scanviewPage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+    
+   <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        >   
+       
+        <ImageView 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_fast_scan"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="4"
+            />
+        
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+            
+           <LinearLayout 
+               android:layout_width="fill_parent"
+               android:layout_height="60dip"
+               android:orientation="horizontal"
+               >
+           
+            <Button
+                android:id="@+id/scanButton"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center|center_vertical"
+                android:text="@string/scan_music"
+                android:textSize="25sp"
+                android:layout_weight="4"
+                 />
+            
+            <TextView 
+                android:id="@+id/music_tip"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginLeft="20dp"
+                android:text="@string/music_count"
+                android:textSize="25sp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                />
+            
+            </LinearLayout>
+           
+            <TextView
+                android:id="@+id/scanText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:textSize="25sp" 
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+</LinearLayout>
