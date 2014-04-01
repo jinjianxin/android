@@ -99,5 +99,10 @@ public class LrcInfo implements Serializable {
 		
 		return position;
 	}
+	
+	public String getLrc(int position)
+	{
+		return lrcList.get(position).getLrc();
+	}
 
 }

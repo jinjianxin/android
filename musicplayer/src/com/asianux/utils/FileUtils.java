@@ -107,5 +107,20 @@ public class FileUtils  {
 			return filename;
 		}
 	}
+	
+	public boolean isFileExists(String name)
+	{
+		String filename = root+ROOT_PATH+LRC_PATH+"/"+name +".lrc";
+		
+		File file = new File(filename);
+		
+		return file.exists();
+				
+	}
+	
+	public String getLrcPath()
+	{
+		return root+ROOT_PATH+LRC_PATH;
+	}
 
 }

@@ -4,5 +4,21 @@
     <string name="app_name">musicplayer</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="noName">NoName</string>
+    <string name="MainActivity">MainActivity</string>
+    <string name="ListActivity">ListActivity</string>
+    <string name="PlayActivity">PayActivity</string>
+    <string name="allMusic">AllMusic</string>
+	<string name="album">Album</string>
+	<string name="singer">Singer</string>
+	<string name="playList">PlayList</string>
+	<string name="storge">Storge</string>
+	<string name="collect">Collection</string>
+	<string name="normal">Normal</string>
+	<string name="singleCycle">SingleCycle</string>
+	<string name="allCycle">AllCycle</string>
+	<string name="random">Random</string>
+	<string name="lrcfile">No Found LRC</string>
+	
+	
 </resources>

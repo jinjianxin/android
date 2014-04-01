@@ -72,8 +72,7 @@ public class PlaylistDialog extends Dialog {
 					long arg3) {
 				// TODO Auto-generated method stub
 				
-				dbManager.insertListDb(list.get(arg2), PlaylistDialog.this.mp3Info.getUrl());
-				
+				dbManager.insertListDb(list.get(arg2), PlaylistDialog.this.mp3Info.getUrl());				
 				dismiss();
 			}
 		});

@@ -23,7 +23,6 @@ public class MainAdapter extends BaseAdapter{
 	private Context context = null;
 	private List<View> viewList = null;
 	
-	
 	public MainAdapter(Context context)
 	{
 		this.context = context;
@@ -32,14 +31,45 @@ public class MainAdapter extends BaseAdapter{
 	
 	public String getViewId(int arg)
 	{
-		
-		View view = viewList.get(arg);
-		
+		if (arg > viewList.size() || arg < 0) {
+			return null;
+		} else {
+			
+			System.out.println("viewList = "+viewList.size());
+
+			View view = viewList.get(arg);
+
+			TextView textView = (TextView) view.findViewById(R.id.itemText);
+			return textView.getText().toString();
+		}
+	}
+	
+	public void setViewText(int position,String title)
+	{
+		View view = viewList.get(position);
+
 		TextView textView = (TextView) view.findViewById(R.id.itemText);
-		
-		//System.out.println(textView.getText().toString());
-		
-		return textView.getText().toString();
+		textView.setText(title);
+	}
+	
+	public View getView(int position)
+	{
+		if(position>viewList.size() || position<0)
+		{
+			return null;
+		}
+		else
+		{
+			return viewList.get(position);
+		}
+	}
+	
+	public void removeView(int position )
+	{
+		if(position >=4 && position<=viewList.size())
+		{
+			viewList.remove(position);
+		}
 	}
 	
 	@Override
@@ -72,9 +102,7 @@ public class MainAdapter extends BaseAdapter{
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		View itemView = inflater.inflate(R.layout.main_layout_item, null);
-
 		TextView textView = (TextView) itemView.findViewById(R.id.itemText);
-
 		textView.setText(title);
 		
 		viewList.add(itemView);

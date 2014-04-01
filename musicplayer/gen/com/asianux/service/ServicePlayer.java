@@ -63,6 +63,29 @@ this.stop();
 reply.writeNoException();
 return true;
 }
+case TRANSACTION_previous:
+{
+data.enforceInterface(DESCRIPTOR);
+this.previous();
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_next:
+{
+data.enforceInterface(DESCRIPTOR);
+this.next();
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_playMode:
+{
+data.enforceInterface(DESCRIPTOR);
+int _arg0;
+_arg0 = data.readInt();
+this.playMode(_arg0);
+reply.writeNoException();
+return true;
+}
 case TRANSACTION_getDuration:
 {
 data.enforceInterface(DESCRIPTOR);
@@ -75,6 +98,22 @@ case TRANSACTION_getCurrentTime:
 {
 data.enforceInterface(DESCRIPTOR);
 int _result = this.getCurrentTime();
+reply.writeNoException();
+reply.writeInt(_result);
+return true;
+}
+case TRANSACTION_getPosition:
+{
+data.enforceInterface(DESCRIPTOR);
+int _result = this.getPosition();
+reply.writeNoException();
+reply.writeInt(_result);
+return true;
+}
+case TRANSACTION_getAudioSessionId:
+{
+data.enforceInterface(DESCRIPTOR);
+int _result = this.getAudioSessionId();
 reply.writeNoException();
 reply.writeInt(_result);
 return true;
@@ -94,6 +133,30 @@ data.enforceInterface(DESCRIPTOR);
 boolean _result = this.isPlaying();
 reply.writeNoException();
 reply.writeInt(((_result)?(1):(0)));
+return true;
+}
+case TRANSACTION_getPlayingUrl:
+{
+data.enforceInterface(DESCRIPTOR);
+java.lang.String _result = this.getPlayingUrl();
+reply.writeNoException();
+reply.writeString(_result);
+return true;
+}
+case TRANSACTION_getPlayingInfo:
+{
+data.enforceInterface(DESCRIPTOR);
+java.lang.String _result = this.getPlayingInfo();
+reply.writeNoException();
+reply.writeString(_result);
+return true;
+}
+case TRANSACTION_getMp3info:
+{
+data.enforceInterface(DESCRIPTOR);
+java.util.List<java.lang.String> _result = this.getMp3info();
+reply.writeNoException();
+reply.writeStringList(_result);
 return true;
 }
 }
@@ -156,6 +219,49 @@ _reply.recycle();
 _data.recycle();
 }
 }
+@Override public void previous() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_previous, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void next() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_next, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void playMode(int mode) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeInt(mode);
+mRemote.transact(Stub.TRANSACTION_playMode, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
 @Override public int getDuration() throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -181,6 +287,40 @@ int _result;
 try {
 _data.writeInterfaceToken(DESCRIPTOR);
 mRemote.transact(Stub.TRANSACTION_getCurrentTime, _data, _reply, 0);
+_reply.readException();
+_result = _reply.readInt();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
+@Override public int getPosition() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+int _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_getPosition, _data, _reply, 0);
+_reply.readException();
+_result = _reply.readInt();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
+@Override public int getAudioSessionId() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+int _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_getAudioSessionId, _data, _reply, 0);
 _reply.readException();
 _result = _reply.readInt();
 }
@@ -222,20 +362,87 @@ _data.recycle();
 }
 return _result;
 }
+@Override public java.lang.String getPlayingUrl() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+java.lang.String _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_getPlayingUrl, _data, _reply, 0);
+_reply.readException();
+_result = _reply.readString();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
+@Override public java.lang.String getPlayingInfo() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+java.lang.String _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_getPlayingInfo, _data, _reply, 0);
+_reply.readException();
+_result = _reply.readString();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
+@Override public java.util.List<java.lang.String> getMp3info() throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+java.util.List<java.lang.String> _result;
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+mRemote.transact(Stub.TRANSACTION_getMp3info, _data, _reply, 0);
+_reply.readException();
+_result = _reply.createStringArrayList();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+return _result;
+}
 }
 static final int TRANSACTION_play = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
 static final int TRANSACTION_pause = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
 static final int TRANSACTION_stop = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-static final int TRANSACTION_getDuration = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-static final int TRANSACTION_getCurrentTime = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-static final int TRANSACTION_setCurrent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
-static final int TRANSACTION_isPlaying = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+static final int TRANSACTION_previous = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
+static final int TRANSACTION_next = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_playMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_getDuration = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+static final int TRANSACTION_getCurrentTime = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
+static final int TRANSACTION_getPosition = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
+static final int TRANSACTION_getAudioSessionId = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
+static final int TRANSACTION_setCurrent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
+static final int TRANSACTION_isPlaying = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
+static final int TRANSACTION_getPlayingUrl = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+static final int TRANSACTION_getPlayingInfo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+static final int TRANSACTION_getMp3info = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
 }
 public void play() throws android.os.RemoteException;
 public void pause() throws android.os.RemoteException;
 public void stop() throws android.os.RemoteException;
+public void previous() throws android.os.RemoteException;
+public void next() throws android.os.RemoteException;
+public void playMode(int mode) throws android.os.RemoteException;
 public int getDuration() throws android.os.RemoteException;
 public int getCurrentTime() throws android.os.RemoteException;
+public int getPosition() throws android.os.RemoteException;
+public int getAudioSessionId() throws android.os.RemoteException;
 public void setCurrent(int cur) throws android.os.RemoteException;
 public boolean isPlaying() throws android.os.RemoteException;
+public java.lang.String getPlayingUrl() throws android.os.RemoteException;
+public java.lang.String getPlayingInfo() throws android.os.RemoteException;
+public java.util.List<java.lang.String> getMp3info() throws android.os.RemoteException;
 }

@@ -4,7 +4,7 @@
     <string name="app_name">musicplayer</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="noName">NoName</string>
+    <string name="noName">Un Known</string>
     <string name="MainActivity">MainActivity</string>
     <string name="PlayActivity">PayActivity</string>
     <string name="allMusic">AllMusic</string>
@@ -13,4 +13,72 @@
 	<string name="playList">PlayList</string>
 	<string name="storge">Storge</string>
 	<string name="collect">Collection</string>
+	<string name="normal">Normal</string>
+	<string name="singleCycle">SingleCycle</string>
+	<string name="allCycle">AllCycle</string>
+	<string name="random">Random</string>
+	<string name="lrcfile">No Found LRC</string>
+	<string name="remove">Remove</string>
+	<string name="add">Add</string>
+	<string name="ring">Ring</string>
+	<string name="music_info">Music Info</string>
+	
+	<string name="remove_music">Delete Music</string>
+	<string name="remove_tip">Delete music form sd card</string>
+	<string name="confirm_delete">Confirm to delete %1s?</string>
+	<string name="remove_dialog_cancel">Cancel</string>
+	<string name="remove_dialog_surce">Confirm</string>
+	
+	<string name="phone_ring">Phone Ringing</string>
+	<string name="message_ring">Message Ringing</string>
+	<string name="all_ring">All Ringing</string>
+	<string name="ring_title">Set Ring</string>
+	
+	<string name="add_to">Add to...</string>
+	<string name="new_list">New List</string>
+	
+	<string name="new_default_list">new list</string>
+	
+	<string name="rename_delete">Delete list</string>
+	<string name="rename_list">Rename</string>
+	
+	<string name="confirm"> Confirm delete this ?</string>
+	
+	<string name="remove_list"> Delete list</string>
+	
+	<string name="music_info_title">File Info</string>
+	
+	<string name="music">Music:</string>
+	<string name="style">Style:</string>
+	<string name="music_info_singer">Singer:</string>
+    <string name="music_info_album">Album:</string>
+    
+    <string name="length">Length:%s</string>
+    <string name="size">Size:%s</string>
+    <string name="format">Format:%s</string>
+    <string name="year">Year:%s</string>
+    <string name="bit">Bit:%s</string>
+    <string name="channels">Channels:%s</string>
+    <string name="sample_rate">SampleRate:%s</string>
+    <string name="path">Path:%s</string>
+    
+	<string name="menu_scan">Scan Music</string>	
+	<string name="menu_mode">Play Mode</string>
+	<string name="menu_effect">Sound Effect</string>
+	<string name="menu_skin">Skin</string>
+	<string name="menu_sleep">Sleep Mode</string>
+	<string name="menu_download">DownLoad</string>
+	<string name="menu_setting">Setting</string>
+	
+	<string name="scan_music">Scan</string>
+	<string name="music_count">count:  %d</string>
+	
+	<string name="add_dialog_title">Add Kind</string>
+	<string name="add_dialog_hint">Add New Kind</string>
+	<string name="add_dialog_sure">Sure</string>
+	<string name="add_dialog_cancel">Cancel</string>
+	
+	<string name="noti_music">NoName</string>
+	<string name="noti_singer">NoName</string>
+	
 </resources>

@@ -118,7 +118,7 @@ public class BaiduParse {
 			eventType = parser.next();
 		}	
 		
-		System.out.println("------size = "+songInfos.size());
+		//System.out.println("------size = "+songInfos.size());
 		
 		return songInfos;
 	}

@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);//此函数必须放在setContentView之前否则会出错
 		setContentView(R.layout.splashlayout);
 		
-		findViewById(R.id.layout);
+		findViewById(R.id.splashlayout);
 
 		
 		endAnimation=AnimationUtils.loadAnimation(this, R.anim.splashanim);
@@ -35,9 +35,9 @@ public class SplashActivity extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				
-				findViewById(R.id.layout).startAnimation(endAnimation);
-				
+
+				findViewById(R.id.splashlayout).startAnimation(endAnimation);
+					
 			}
 		};
 		

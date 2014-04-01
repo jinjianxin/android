@@ -5,14 +5,24 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     >
+
+        <TextView 
+        android:id="@+id/play_view_singer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+  		android:text="@string/noName"
+  		android:textSize="20sp"
+  		android:layout_weight="1"
+        />
     
     <TextView 
         android:id="@+id/play_view_file"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
   		android:text="@string/noName"
-  		android:textSize="25sp"
+  		android:textSize="20sp"
   		android:layout_weight="1"
         />
     

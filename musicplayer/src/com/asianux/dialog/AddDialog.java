@@ -33,6 +33,13 @@ public class AddDialog extends Dialog {
 	private static int FLAG_ADD = 1;
 	private static int FLAG_RING = 2;
 	private static int FLAG_INFO =  3;
+	
+	public interface AddDialogListener
+	{
+		public void removedialog(Mp3Info mp3Info);
+	}
+	
+	private AddDialogListener addDialogListener = null;
 
 	public AddDialog(Context context, int theme) {
 		super(context, theme);
@@ -46,11 +53,21 @@ public class AddDialog extends Dialog {
 		this.context = context;
 	}
 	
+	/*
 	public AddDialog(Context context,Mp3Info mp3Info) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.mp3Info = mp3Info;
+	}
+	*/
+	
+	public AddDialog(Context context,Mp3Info mp3Info,AddDialogListener listener) {
+		super(context);
+		// TODO Auto-generated constructor stub
+		this.context = context;
+		this.mp3Info = mp3Info;
+		this.addDialogListener = listener;
 	}
 	
 
@@ -77,17 +94,35 @@ public class AddDialog extends Dialog {
 			
 				if(arg2 == FLAG_REMOVE)
 				{
+					/*RemoveDialog dialog = new RemoveDialog(AddDialog.this.context,AddDialog.this.mp3Info);
+					dialog.show();*/
+					
+					AddDialog.this.addDialogListener.removedialog(mp3Info);
+					
+					dismiss();
 					
 				}else if(arg2 == FLAG_ADD)
 				{
+					PlaylistDialog dialog = new PlaylistDialog(AddDialog.this.context,AddDialog.this.mp3Info);
+					dialog.show();
+					
+					dismiss();
 					
 				}else if(arg2 == FLAG_RING)
 				{
+					RingDialog dialog = new RingDialog(AddDialog.this.context,AddDialog.this.mp3Info);
+					dialog.show();
+					
+					dismiss();
+					
 					
 				}else if(arg2 == FLAG_INFO)
 				{
-					
+					MusicInfoDialog dialog = new MusicInfoDialog(AddDialog.this.context,AddDialog.this.mp3Info.getUrl());
+					dialog.show();
+					dismiss();
 				}
+				
 				
 			}
 		});

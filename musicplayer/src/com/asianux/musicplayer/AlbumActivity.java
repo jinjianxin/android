@@ -8,6 +8,7 @@ import com.asianux.utils.MediaUtils;
 import com.asianux.utils.Mp3Info;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -24,9 +25,10 @@ import android.widget.AdapterView.OnItemClickListener;
 public class AlbumActivity  extends Activity{
 	
 	private GridView ablumView = null;
+	private final static String ALBUMMUSIC = "album";
 	
 	List<String> albumList = null;
-	Map<String , List<Mp3Info>> albumMap = null;
+//	Map<String , List<Mp3Info>> albumMap = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,6 @@ public class AlbumActivity  extends Activity{
 		ablumView.setAdapter(new AlbumApapter(AlbumActivity.this));
 
 		albumList = mediaUtils.getAlbumList();
-		albumMap = mediaUtils.getALbumMap();
-
 		
 		System.out.println("albumList="+albumList.size());
 		
@@ -54,9 +54,11 @@ public class AlbumActivity  extends Activity{
 					long arg3) {
 				// TODO Auto-generated method stub
 				
-				List<Mp3Info> tmpMap = albumMap.get(albumList.get(arg2));
-				
-				System.out.println("tmpMap = "+tmpMap.size());
+				Intent intent = new Intent();
+				intent.setClass(AlbumActivity.this, ListActivity.class);
+				intent.putExtra("tag",ALBUMMUSIC);
+				intent.putExtra("arg", albumList.get(arg2));
+				AlbumActivity.this.startActivity(intent);
 				
 			}
 		});

@@ -35,8 +35,6 @@ public class SingerAdapter extends BaseAdapter {
 
 		List<String > list = mediaUtils.getSingerList();
 		
-		System.out.println("*****\t"+list.size());
-		
 		for (String string : list) {
 			View view = MakeItemView(string);
 
@@ -76,8 +74,6 @@ public class SingerAdapter extends BaseAdapter {
 		View itemView = inflater.inflate(R.layout.singer_view_item, null);
 
 		TextView textView = (TextView) itemView.findViewById(R.id.singerText);
-
-		System.out.println(title);
 		
 		textView.setText(title);
 

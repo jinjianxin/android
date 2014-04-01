@@ -11,11 +11,11 @@ public class BaiduInfo {
 
 	private String decode = null;
 
-	private String type;
+	private String type = null;
 
-	private String lrcid;
+	private String lrcid = null;
 
-	private String flag;
+	private String flag = null;
 
 	public String toString() {
 		return  encode+"\t"+decode+"\t"+type+"\t"+lrcid+"\t"+flag;

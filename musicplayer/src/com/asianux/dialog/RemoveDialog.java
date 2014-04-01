@@ -31,20 +31,38 @@ public class RemoveDialog extends Dialog{
 	private Button cancelButton = null;
 	private Button sureButton = null;
 
+	public interface RemoveDialogListener
+	{
+		public void removeWithList(Mp3Info mp3Info);
+		public void removeWithSource(Mp3Info mp3Info);
+	}
+	
+	private RemoveDialogListener removeDialogListener = null;
+	
 	public RemoveDialog(Context context) {
 		super(context);
 		this.context = context;
 		
 		// TODO Auto-generated constructor stub
 	}
-	
+	/*
 	public RemoveDialog(Context context,Mp3Info mp3Info) {
 		super(context);
 		
 		this.context = context;
 		this.mp3Info = mp3Info;
 		// TODO Auto-generated constructor stub
+	}*/
+	
+	public RemoveDialog(Context context,Mp3Info mp3Info,RemoveDialogListener listener) {
+		super(context);
+		
+		this.context = context;
+		this.mp3Info = mp3Info;
+		this.removeDialogListener = listener;
+		// TODO Auto-generated constructor stub
 	}
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +78,7 @@ public class RemoveDialog extends Dialog{
 		checkTipText = (TextView) findViewById(R.id.remove_dialog_text);
 		checkBox = (CheckBox) findViewById(R.id.remove_dialog_checkbox);
 		cancelButton = (Button) findViewById(R.id.remove_dialog_cancel);
-		sureButton = (Button) findViewById(R.id.remove_dialog_surce);
+		sureButton = (Button) findViewById(R.id.remove_dialog_suce);
 		
 		String str = resource.getString(R.string.confirm_delete);
 		str = String.format(str, mp3Info.getTitle());
@@ -85,12 +103,16 @@ public class RemoveDialog extends Dialog{
 				// TODO Auto-generated method stub
 				
 				if(checkBox.isChecked())
-				{
-					System.out.println("on checked \n");
+				{					
+					RemoveDialog.this.removeDialogListener.removeWithSource(mp3Info);
+					
+					dismiss();
 					
 				}else
 				{
-					System.out.println("no checked \n");
+					RemoveDialog.this.removeDialogListener.removeWithList(mp3Info);
+					
+					dismiss();
 				}
 				
 			}

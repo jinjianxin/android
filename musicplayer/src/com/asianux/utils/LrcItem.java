@@ -18,7 +18,7 @@ public class LrcItem implements Serializable{
 	public LrcItem(long startTime,long endTime ,String lrc) {
 		// TODO Auto-generated constructor stub
 		
-		System.out.println("startTime = "+startTime+"\t"+"endTime = "+endTime);
+	//	System.out.println("startTime = "+startTime+"\t"+"endTime = "+endTime);
 		
 		this.startTime=startTime;
 		this.endTime=endTime;

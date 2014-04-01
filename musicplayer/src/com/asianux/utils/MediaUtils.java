@@ -1,255 +1,352 @@
 package com.asianux.utils;
 
+import java.io.BufferedReader;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.asianux.musicplayer.R;
+import org.apache.http.util.EncodingUtils;
 
-import android.R.bool;
-import android.content.ContentResolver;
-import android.content.ContentUris;
+import com.asianux.database.DbManager;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader.TileMode;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.telephony.SignalStrength;
 
 public class MediaUtils {
+	
+	
+	private volatile static MediaUtils mediaUtils = null;
+	private DbManager dbManager = null;
+	private Context context = null;
 
 	private static final Uri albumArtUri = Uri
 			.parse("content://media/external/audio/albumart");
+	
+	private List<Mp3Info> collectList = new ArrayList<Mp3Info>();
+	private List<String > albumList = new ArrayList<String>();
+	private List<String > singerList = new ArrayList<String>();
+	
+	private List<String > keyList = new ArrayList<String>();
+	private Map<String, List<String> > albumMap = new HashMap<String, List<String> >();
+	private Map<String, List<String> > singerMap = new HashMap<String, List<String>>();
+	private Map<String , Mp3Info> mp3infoMap = new HashMap<String, Mp3Info>();
 
-	public MediaUtils() {
-		super();
-	}
-
-	public static List<Mp3Info> getMp3Info(Context context) {
-
-		List<Mp3Info> list = new ArrayList<Mp3Info>();
-
-		Cursor cursor = context.getContentResolver().query(
-				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null,
-				MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-
-		for (int i = 0; i < cursor.getCount(); i++) {
-			cursor.moveToNext();
-
-			Mp3Info mp3Info = new Mp3Info();
-
-			long id = cursor.getLong(cursor
-					.getColumnIndex(MediaStore.Audio.Media._ID));
-
-			String title = cursor.getString((cursor
-					.getColumnIndex(MediaStore.Audio.Media.TITLE)));
-
-			String artist = cursor.getString(cursor
-					.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-
-			String album = cursor.getString(cursor
-					.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-
-			long albumId = cursor.getInt(cursor
-					.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-
-			long duration = cursor.getLong(cursor
-					.getColumnIndex(MediaStore.Audio.Media.DURATION));
-
-			long size = cursor.getLong(cursor
-					.getColumnIndex(MediaStore.Audio.Media.SIZE));
-
-			String url = cursor.getString(cursor
-					.getColumnIndex(MediaStore.Audio.Media.DATA));
-
-			int isMusic = cursor.getInt(cursor
-					.getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));
-
-			if (isMusic != 0) {
-				mp3Info.setId(id);
-				mp3Info.setTitle(title);
-				mp3Info.setArtist(artist);
-				mp3Info.setAlbum(album);
-				mp3Info.setAlbumId(albumId);
-				mp3Info.setDuration(duration);
-				mp3Info.setSize(size);
-				mp3Info.setUrl(url);
-				list.add(mp3Info);
-			}
-		}
-
-		return list;
-
-	}
-
-	public static String formatTime(long time) {
-		String min = time / (1000 * 60) + "";
-		String sec = time % (1000 * 60) + "";
-		if (min.length() < 2) {
-			min = "0" + time / (1000 * 60) + "";
-		} else {
-			min = time / (1000 * 60) + "";
-		}
-		if (sec.length() == 4) {
-			sec = "0" + (time % (1000 * 60)) + "";
-		} else if (sec.length() == 3) {
-			sec = "00" + (time % (1000 * 60)) + "";
-		} else if (sec.length() == 2) {
-			sec = "000" + (time % (1000 * 60)) + "";
-		} else if (sec.length() == 1) {
-			sec = "0000" + (time % (1000 * 60)) + "";
-		}
-		return min + ":" + sec.trim().substring(0, 2);
-	}
-
-	public static Bitmap getMusicAlbum(Context context, long song_id,
-			long album_id, Boolean allowdefalut) {
-
-		System.out.println("--------------------------------------\n");
-
-		if (album_id < 0) {
-			if (song_id < 0) {
-				Bitmap bm = getArtworkFromFile(context, song_id, -1);
-				if (bm != null) {
-					return bm;
+	public static MediaUtils getInstance(Context context) {
+			   
+			   synchronized (MediaUtils.class) {
+				if(mediaUtils == null)
+				{
+					mediaUtils = new MediaUtils(context);
 				}
 			}
+		
+		return mediaUtils;
+	}
+	
+	
+	public MediaUtils(Context context) {
+		super();
+		this.context = context;
+		dbManager =DbManager.getInstance(context);
+		
+		collectList.clear();
+		albumList.clear();
+		singerList.clear();
+		keyList.clear();
+		albumMap.clear();
+		singerMap.clear();
+		mp3infoMap.clear();
+		
+		initData();
+	}
+	
+	public void  initData() {
+		
+		List<Mp3Info> list = dbManager.getAllMusic();
 
-			if (allowdefalut) {
-				return getDefaultArtwork(context);
+		if (list != null) {
+
+			System.out.println("**************************************1");
+			
+			int count = list.size();
+
+			for (int i = 0; i < count; i++) {
+
+				Mp3Info mp3Info = list.get(i);
+
+				if (albumMap.containsKey(mp3Info.getAlbum())) {
+					List<String> atmpList = albumMap.get(mp3Info.getAlbum());
+					atmpList.add(mp3Info.getUrl());
+					albumMap.put(mp3Info.getAlbum(), atmpList);
+				} else if (mp3Info.getAlbum().equals("NULL")) {
+					//System.out.println("----------------null");
+
+					if (albumMap.containsKey("NULL")) {
+						List<String> atmpList = albumMap.get("NULL");
+						atmpList.add(mp3Info.getUrl());
+						albumMap.put("NULL", atmpList);
+					} else {
+						List<String> atmpList = new ArrayList<String>();
+						atmpList.add(mp3Info.getUrl());
+						albumMap.put("NULL", atmpList);
+						albumList.add("NULL");
+					}
+				} else {
+					List<String> atmpList = new ArrayList<String>();
+					atmpList.add(mp3Info.getUrl());
+					albumMap.put(mp3Info.getAlbum(), atmpList);
+					albumList.add(mp3Info.getAlbum());
+				}
+
+				if (singerMap.containsKey(mp3Info.getArtist())) {
+					List<String> stmpList = singerMap.get(mp3Info.getArtist());
+					stmpList.add(mp3Info.getUrl());
+					singerMap.put(mp3Info.getArtist(), stmpList);
+				} else if (mp3Info.getArtist().equals("NULL")) {
+					if (singerMap.containsKey("NULL")) {
+						List<String> atmpList = singerMap.get("NULL");
+						atmpList.add(mp3Info.getUrl());
+						singerMap.put("NULL", atmpList);
+					} else {
+						List<String> atmpList = new ArrayList<String>();
+						atmpList.add(mp3Info.getArtist());
+						singerMap.put("NULL", atmpList);
+						singerList.add("NULL");
+					}
+				} else {
+					List<String> stmpList = new ArrayList<String>();
+					stmpList.add(mp3Info.getUrl());
+					singerMap.put(mp3Info.getArtist(), stmpList);
+					singerList.add(mp3Info.getArtist());
+				}
+
+				mp3infoMap.put(mp3Info.getUrl(), mp3Info);
+				keyList.add(mp3Info.getUrl());
+
 			}
+		}
+		
+	}
+		
+	public Map<String , List<String> > getALbumMap()
+	{
+		return albumMap;
+	}
+	
+	public Map<String , List<String>> getSingerMap()
+	{
+		return singerMap;
+	}
+	
+	public List<String > getAlbumList()
+	{
+		return albumList;
+	}
+	
+	public List<String > getAlbumList(String album)
+	{
+		if(albumMap.isEmpty())
+		{
 			return null;
 		}
-
-		ContentResolver res = context.getContentResolver();
-		Uri uri = ContentUris.withAppendedId(albumArtUri, album_id);
-		if (uri != null) {
-			InputStream in = null;
-			try {
-				in = res.openInputStream(uri);
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				// 先制定原始大小
-				options.inSampleSize = 1;
-				// 只进行大小判断
-				options.inJustDecodeBounds = true;
-				// 调用此方法得到options得到图片的大小
-				BitmapFactory.decodeStream(in, null, options);
-
-				options.inSampleSize = computeSampleSize(options, 600);
-
-				// 我们得到了缩放比例，现在开始正式读入Bitmap数据
-				options.inJustDecodeBounds = false;
-				options.inDither = false;
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				in = res.openInputStream(uri);
-				return BitmapFactory.decodeStream(in, null, options);
-			} catch (FileNotFoundException e) {
-				Bitmap bm = getArtworkFromFile(context, song_id, album_id);
-				if (bm != null) {
-					if (bm.getConfig() == null) {
-						bm = bm.copy(Bitmap.Config.RGB_565, false);
-						if (bm == null && allowdefalut) {
-							return getDefaultArtwork(context);
-						}
-					}
-				} else if (allowdefalut) {
-					bm = getDefaultArtwork(context);
-				}
-				return bm;
-			} finally {
-				try {
-					if (in != null) {
-						in.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
+		else
+		{
+			return albumMap.get(album);
+		}
+	}
+	
+	public void removeAlbumList(Mp3Info mp3Info)
+	{
+		if(!albumMap.isEmpty())
+		{
+			//singerMap.remove(singer);
+			
+			List<String> list = albumMap.get(mp3Info.getAlbum());
+			if(list !=null && !list.isEmpty())
+			{
+				int index = list.indexOf(mp3Info.getUrl());
+				if(index !=-1)
+				{
+					list.remove(index);
 				}
 			}
+			
 		}
-
-		return null;
+	}
+	
+	
+	public List<String > getSingerList()
+	{
+		return singerList;
+	}
+	
+	public List<String > getSingerList(String singer)
+	{
+		if(singerMap.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return singerMap.get(singer);
+		}
+	}
+	
+	public void removeSingerList(Mp3Info mp3Info)
+	{
+		if(!singerMap.isEmpty())
+		{
+			//singerMap.remove(singer);
+			
+			List<String> list = singerMap.get(mp3Info.getArtist());
+			if(list !=null && !list.isEmpty())
+			{
+				int index = list.indexOf(mp3Info.getUrl());
+				if(index !=-1)
+				{
+					list.remove(index);
+				}
+			}
+			
+		}
+	}
+	
+	/**
+	 * 
+	 * getMp3infoList获得系统全部音乐
+	 * (这里描述这个方法适用条件 – 可选)
+	 * @return 
+	 *List<String>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<String> getMp3infoList()
+	{
+		return keyList;
+	}
+	
+	public void removeMp3infoItem(String key)
+	{
+		if(keyList !=null && !keyList.isEmpty())
+		{	
+			keyList.remove(key);
+		}
+	}
+	
+	
+	public Mp3Info getMp3infoWithKey(String key)
+	{		
+		if(mp3infoMap.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return mp3infoMap.get(key);
+		}
+		
+	}
+	
+	public void addCollectMp3info(Mp3Info mp3Info)
+	{
+		collectList.add(mp3Info);
+	}
+	
+	public void removeCollectMp3info(Mp3Info mp3Info)
+	{
+		int size = collectList.size();
+		
+		for (int i = 0; i < size; i++) {
+			if(collectList.get(i).equals(mp3Info.getUrl()))
+			{
+				collectList.remove(i);
+				break;
+			}
+		}
+	}
+	
+	
+	/**
+	 * addCollect 收藏歌曲
+	 * @param mp3Info 
+	 *void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void addCollect(Mp3Info mp3Info)
+	{
+		
+	}
+	
+	/**
+	 * 
+	 * removeCollect 删除已收藏歌曲
+	 * (这里描述这个方法适用条件 – 可选)
+	 * @param mp3Info 
+	 *void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	
+	public void removeCollect(Mp3Info mp3Info)
+	{
+	
+	}
+	
+	public static Bitmap getAlbumInverted(Bitmap originalImage)
+	{
+		    final int reflectionGap = 4;
+		    int width = originalImage.getWidth(); 
+		    int height = originalImage.getHeight();
+		    Matrix matrix = new Matrix(); 
+		    matrix.preScale(1, -1);
+		    Bitmap reflectionImage = Bitmap.createBitmap(originalImage, 0, 
+		            height / 2, width, height / 2, matrix, false);
+		    Bitmap bitmapWithReflection = Bitmap.createBitmap(width, 
+		            (height + height / 2), Config.ARGB_8888);
+		    Canvas canvas = new Canvas(bitmapWithReflection);
+		    canvas.drawBitmap(originalImage, 0, 0, null);
+		    Paint defaultPaint = new Paint(); 
+		    canvas.drawRect(0, height, width, height + reflectionGap, defaultPaint);
+		    canvas.drawBitmap(reflectionImage, 0, height + reflectionGap, null);
+		    Paint paint = new Paint(); 
+		    LinearGradient shader = new LinearGradient(0, 
+		            originalImage.getHeight(), 0, bitmapWithReflection.getHeight() 
+		                    + reflectionGap, 0x70ffffff, 0x00ffffff, TileMode.MIRROR);
+		    
+		    //LinearGradient shader = new LinearGradient(x0, y0, x1, y1, color0, color1, tile)
+		    paint.setShader(shader);
+		    paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
+		    canvas.drawRect(0, height, width, bitmapWithReflection.getHeight() 
+		            + reflectionGap, paint);
+		    return bitmapWithReflection; 
 	}
 
-	private static int computeSampleSize(Options options, int target) {
-
+	public void clear() {
 		// TODO Auto-generated method stub
-
-		int w = options.outWidth;
-		int h = options.outHeight;
-		int candidateW = w / target;
-		int candidateH = h / target;
-		int candidate = Math.max(candidateW, candidateH);
-		if (candidate == 0) {
-			return 1;
-		}
-		if (candidate > 1) {
-			if ((w > target) && (w / candidate) < target) {
-				candidate -= 1;
-			}
-		}
-		if (candidate > 1) {
-			if ((h > target) && (h / candidate) < target) {
-				candidate -= 1;
-			}
-		}
-		return candidate;
-	}
-
-	private static Bitmap getDefaultArtwork(Context context) {
-		// TODO Auto-generated method stub
-
-		BitmapFactory.Options opts = new BitmapFactory.Options();
-		opts.inPreferredConfig = Bitmap.Config.RGB_565;
-
-		return BitmapFactory.decodeStream(context.getResources()
-				.openRawResource(R.drawable.defaultalbum), null, opts);
-	}
-
-	private static Bitmap getArtworkFromFile(Context context, long songid,
-			long albumid) {
-		// TODO Auto-generated method stub
-
-		Bitmap bm = null;
-		if (albumid < 0 && songid < 0) {
-			throw new IllegalArgumentException(
-					"Must specify an album or a song id");
-		}
-		try {
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			FileDescriptor fd = null;
-			if (albumid < 0) {
-				Uri uri = Uri.parse("content://media/external/audio/media/"
-						+ songid + "/albumart");
-				ParcelFileDescriptor pfd = context.getContentResolver()
-						.openFileDescriptor(uri, "r");
-				if (pfd != null) {
-					fd = pfd.getFileDescriptor();
-				}
-			} else {
-				Uri uri = ContentUris.withAppendedId(albumArtUri, albumid);
-				ParcelFileDescriptor pfd = context.getContentResolver()
-						.openFileDescriptor(uri, "r");
-				if (pfd != null) {
-					fd = pfd.getFileDescriptor();
-				}
-			}
-			options.inSampleSize = 1;
-			options.inJustDecodeBounds = true;
-			BitmapFactory.decodeFileDescriptor(fd, null, options);
-			options.inSampleSize = 100;
-			options.inJustDecodeBounds = false;
-			options.inDither = false;
-			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-			bm = BitmapFactory.decodeFileDescriptor(fd, null, options);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return bm;
-	}
-
+		keyList.clear();
+		albumMap.clear();
+		singerMap.clear();
+		mp3infoMap.clear();
+	} 
 }

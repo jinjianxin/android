@@ -2,29 +2,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
-     >
-    
-    <TextView 
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <TextView
         android:id="@+id/musicName"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/noName"
-        android:textSize="20sp"
         android:gravity="center"
-        />
-    
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="@string/noName"
+        android:textSize="20sp" />
+
+    <ImageView
         android:id="@+id/albumImage"
-        android:src="@drawable/defaultplayalbum"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/musicName"
         android:layout_below="@+id/musicName"
-        />
-    
+        android:layout_marginTop="60dp"
+        android:src="@drawable/defaultalbum_256" />
+
+    <SeekBar
+        android:id="@+id/myProgress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/albumImage"
+        android:layout_below="@+id/albumImage"
+        android:layout_marginTop="200dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/musicName"
+        android:layout_below="@id/myProgress"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/volumeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:background="@drawable/volume_style"
+            />
+
+        <Button
+            android:id="@+id/prevButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/prev_music_style"
+            />
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/play_music_style"
+             />
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/next_music_style"
+            />
+
+        <Button
+            android:id="@+id/ModeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"     
+            android:background="@drawable/playmode_normal"      
+            />
+    </LinearLayout>
 
 </RelativeLayout>

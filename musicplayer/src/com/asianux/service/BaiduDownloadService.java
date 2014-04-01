@@ -35,6 +35,7 @@ public class BaiduDownloadService extends IntentService {
 
 	protected static final String SONGINFO_BASE_URL = "http://box.zhangmen.baidu.com/x";
 	protected static final String LYRIC_BASE_URL = "http://box.zhangmen.baidu.com/bdlrc";
+	private final String MUSICLRC = "Music.Player.LRC_BROADCAST";
 
 	private int COLLCITION_TIMEOUT = 10000;
 	private int READ_TIMEOUT = 15000;
@@ -54,48 +55,68 @@ public class BaiduDownloadService extends IntentService {
 
 		Mp3Info musciInfo = (Mp3Info) intent.getSerializableExtra("mp3info");
 
-		System.out.println(musciInfo.getArtist() + "\t" + musciInfo.getTitle()
-				+ "\n");
+		FileUtils fileUtils = FileUtils.getInstance();	
+		
+		if (fileUtils.isFileExists(musciInfo.getTitle())) {
+			
+			//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^1");
+			String lrcPath = fileUtils.getLrcPath()+"/"+musciInfo.getTitle() +".lrc";
+			musciInfo.setLrc(lrcPath);
+			
+			DbManager dbManager = DbManager
+					.getInstance(BaiduDownloadService.this);
+			dbManager.insert(musciInfo);
 
-		if (musciInfo.getArtist().length() != 0
-				&& musciInfo.getTitle().length() != 0) {
+			Intent lrcIntent = new Intent();
+			lrcIntent.putExtra("lrcPath", lrcPath);
+			lrcIntent.setAction(MUSICLRC);
+			sendBroadcast(lrcIntent);
+			
+		} else {
+			//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^2\t"+musciInfo.getTitle());
+			if (musciInfo.getArtist().length() != 0
+					&& musciInfo.getTitle().length() != 0) {
 
-			try {
-				String url = getLrcUrl(musciInfo.getTitle(),
-						musciInfo.getArtist());
-				String data = useHttpClient(url);
+				try {
+					String url = getLrcUrl(musciInfo.getTitle(),
+							musciInfo.getArtist());
+					String data = useHttpClient(url);
 
-				List<BaiduInfo> list = BaiduParse.getBaidunfo(data);
+					List<BaiduInfo> list = BaiduParse.getBaidunfo(data);
 
-				if (!list.isEmpty()) {
+					if (!list.isEmpty()) {
 
-					String lrcUrl = getLrcUrlBySongInfo(list.get(0));
-					
-					System.out.println(lrcUrl);
+						String lrcUrl = getLrcUrlBySongInfo(list.get(0));
 
-					if (lrcUrl.length() !=0) {
-						String lrcPath = useHttpClientLrc(lrcUrl, musciInfo);	
-						musciInfo.setLrc(lrcPath);
+						if (lrcUrl !=null&&lrcUrl.length() != 0) {
+							String lrcPath = useHttpClientLrc(lrcUrl, musciInfo);
+							musciInfo.setLrc(lrcPath);
 
-						DbManager dbManager = DbManager.getInstance(BaiduDownloadService.this);
-						dbManager.insert(musciInfo);
-						
-						
+							DbManager dbManager = DbManager
+									.getInstance(BaiduDownloadService.this);
+							dbManager.insert(musciInfo);
+
+							Intent lrcIntent = new Intent();
+							lrcIntent.putExtra("lrcPath", lrcPath);
+							lrcIntent.setAction(MUSICLRC);
+							sendBroadcast(lrcIntent);
+
+						}
 					}
-				}
 
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (XmlPullParserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (XmlPullParserException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -138,7 +159,7 @@ public class BaiduDownloadService extends IntentService {
 		HttpResponse httpResponse = httpclient.execute(httpRequest);
 
 		if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-			
+
 			InputStream in = httpResponse.getEntity().getContent();
 
 			FileUtils fileUtils = FileUtils.getInstance();
@@ -172,17 +193,23 @@ public class BaiduDownloadService extends IntentService {
 	}
 
 	private String getLrcUrlBySongInfo(BaiduInfo info) {
-		int lrcid = Integer.parseInt(info.getLrcid());
-		int postfix = lrcid / 100;
+		
+		if (info.getLrcid() != null) {
+			
+			int lrcid = Integer.parseInt(info.getLrcid());
+			int postfix = lrcid / 100;
 
-		StringBuffer sb = new StringBuffer();
-		sb.append(LYRIC_BASE_URL);
-		sb.append("/");
-		sb.append(postfix);
-		sb.append("/");
-		sb.append(lrcid);
-		sb.append(".lrc");
+			StringBuffer sb = new StringBuffer();
+			sb.append(LYRIC_BASE_URL);
+			sb.append("/");
+			sb.append(postfix);
+			sb.append("/");
+			sb.append(lrcid);
+			sb.append(".lrc");
 
-		return sb.toString();
+			return sb.toString();
+		} else {
+			return null;
+		}
 	}
 }

@@ -5,5 +5,13 @@
     android:orientation="vertical"
     android:background="@drawable/background"  
     >
+    
+
+    <com.asianux.musicplayer.LrcView 
+        android:id="@+id/play_view_lrcView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+    
 </LinearLayout>
                                                                                        

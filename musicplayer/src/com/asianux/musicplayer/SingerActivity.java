@@ -9,6 +9,7 @@ import com.asianux.utils.MediaUtils;
 import com.asianux.utils.Mp3Info;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -24,10 +25,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class SingerActivity extends Activity{
 	
+	private final static String SINGERMUSIC = "singer";
+	
 	private GridView ablumView = null;
 	
 	List<String> singerList = null;
-	Map<String , List<Mp3Info>> singerMap = null;
+	//Map<String , List<Mp3Info>> singerMap = null;
 	
 
 	@Override
@@ -43,11 +46,8 @@ public class SingerActivity extends Activity{
 		
 		ablumView.setAdapter(new SingerAdapter(SingerActivity.this));
 
-		singerList = mediaUtils.getAlbumList();
-		singerMap = mediaUtils.getALbumMap();
-
-		
-		System.out.println("singerList="+singerList.size());
+		singerList = mediaUtils.getSingerList();
+		//singerMap = mediaUtils.getALbumMap();
 		
 		ablumView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -56,14 +56,14 @@ public class SingerActivity extends Activity{
 					long arg3) {
 				// TODO Auto-generated method stub
 				
-				List<Mp3Info> tmpMap = singerMap.get(singerList.get(arg2));
-				
-				System.out.println("tmpMap = "+tmpMap.size());
-				
+				Intent intent = new Intent();
+				intent.setClass(SingerActivity.this, ListActivity.class);
+				intent.putExtra("tag",SINGERMUSIC);
+				intent.putExtra("arg", singerList.get(arg2));
+				SingerActivity.this.startActivity(intent);
+								
 			}
 		});
-	
-		
 	}
 	
 	@Override

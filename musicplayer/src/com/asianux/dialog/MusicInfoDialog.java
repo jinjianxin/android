@@ -20,7 +20,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.renderscript.Script.KernelID;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 

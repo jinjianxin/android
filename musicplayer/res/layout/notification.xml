@@ -31,7 +31,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="test1"
+                android:text="@string/noti_music"
                 />
             
             <TextView 
@@ -39,7 +39,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="test2"
+                android:text="@string/noti_singer"
                 />
             
         </LinearLayout> 
