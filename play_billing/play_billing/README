@@ -1,0 +1,21 @@
+Copyright (c) 2012 Google Inc. All rights reserved.
+
+PACKAGES FOR GOOGLE PLAY IN-APP BILLING
+
+This package contains files and sample code for two different versions
+of the in-app billing API: version 2 and version 3. Version 3 is recommended
+unless you need a particular feature that is only available on version 2. For
+more information about the differences and for general orientation about
+which version to choose, please refer to:
+
+   http://developer.android.com/google/play/billing/index.html
+
+Directories:
+
+in-app-billing-v03/
+   AIDL file and sample application demonstrating how to implement
+   in-app billing version 3.
+
+in-app-billing-v02/
+   Sample demonstrating how to implement in-app billing version 2.
+
