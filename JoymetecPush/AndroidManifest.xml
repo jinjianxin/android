@@ -79,6 +79,18 @@
             </intent-filter>
         </receiver>
         
+        <receiver 
+            android:name="com.joymetec.push.MyReceiver"
+            >
+            <intent-filter >
+                <action android:name="com.joymetec.click"/>         
+            </intent-filter>
+            <intent-filter >
+                <action android:name="com.joymetec.shownotify"/>
+            </intent-filter>
+            
+        </receiver>
+        
         <service android:name="com.joymetec.push.DownLoadService" ></service>
         
 </application>

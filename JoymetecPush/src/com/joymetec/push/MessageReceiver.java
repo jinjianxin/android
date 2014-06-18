@@ -8,11 +8,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -20,6 +27,7 @@ import android.os.Message;
 import android.sax.StartElementListener;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -38,8 +46,11 @@ public class MessageReceiver extends PushMessageReceiver {
     private String mAlias;
     private String mStartTime;
     private String mEndTime;
-    private String[] key = { "url", "name", "package", "version" };
-
+    private String[] key = { "url", "name", "package", "version" ,"tip","title"};
+    private int notifyId = 0;
+    private String CLICK_ACTION = "com.joymetec.click"; 
+    private String SHOW_NOTIFICATION = "com.joymetec.shownotify";
+    
     @Override
     public void onReceiveMessage(Context context, MiPushMessage message) {
        Log.v(JoymetecApplication.TAG, "onReceiveMessage is called. " + message.toString());
@@ -54,7 +65,19 @@ public class MessageReceiver extends PushMessageReceiver {
         msg.obj = message.toString();
         JoymetecApplication.getHandler().sendMessage(msg);
         
-        if(!mMessage.isEmpty())
+        
+        HashMap<String, String> map = parsingArgument(mMessage);
+        if(map!=null)
+        {
+        	//showNotification(context,map.get(key[4]),map.get(key[5]));
+        	Intent intent = new Intent();
+        	intent.setAction(SHOW_NOTIFICATION);
+        	intent.putExtra("arg", mMessage);
+        	context.sendBroadcast(intent);
+        }
+       
+        
+        if(map!=null &&mMessage.length()>0)
         {
         	Log.d(JoymetecApplication.TAG, "msg = "+mMessage);
         	if(Network.hasNetwork(context))
@@ -67,19 +90,8 @@ public class MessageReceiver extends PushMessageReceiver {
         			intent.setClass(context, DownLoadService.class);
         			context.startService(intent);
         		}
-        		else
-        		{
-        			HashMap<String, String> map = parsingArgument(mMessage);
-        			if(map !=null)
-        			{
-        				Uri  uri = Uri.parse(map.get(key[0]));
-        				Intent  intent = new  Intent(Intent.ACTION_VIEW, uri);
-        				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        				context.startActivity(intent);
-        			}
-        		}
         	}
-        }
+       }
     }
 
     
@@ -92,8 +104,8 @@ public class MessageReceiver extends PushMessageReceiver {
             if(MiPushClient.COMMAND_REGISTER.equals(command)
                     && arguments.size() == 1) {
                 mRegId = arguments.get(0);
-                //MiPushClient.subscribe(context, "hssg", null);
                 MiPushClient.subscribe(context, "hssg", null);
+                MiPushClient.setAlias(context, "hssg", null);
                 Log.d(JoymetecApplication.TAG, "mRegId = "+mRegId);
             } else if((MiPushClient.COMMAND_SET_ALIAS .equals(command)
                     || MiPushClient.COMMAND_UNSET_ALIAS.equals(command))
@@ -127,8 +139,7 @@ public class MessageReceiver extends PushMessageReceiver {
 
         @Override
         public void handleMessage(Message msg) {
-            String s = (String)msg.obj;
-            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+          
         }
     }
     
@@ -136,18 +147,18 @@ public class MessageReceiver extends PushMessageReceiver {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String str =message;
 
-		String[] info = str.split(";", 4);
+		String[] info = str.split(";", 6);
 
-		Log.d(JoymetecApplication.TAG, "size = " + info.length);
+	//	Log.d(JoymetecApplication.TAG, "size = " + info.length);
 
-		if (info.length != 4)
+		if (info.length != 6)
 			return null;
 
 		for (int i = 0; i < info.length; i++) {
 			map.put(key[i], info[i]);
-			Log.d(JoymetecApplication.TAG, "key =" + key[i] + "  " + info[i]);
+			//Log.d(JoymetecApplication.TAG, "key =" + key[i] + "  " + info[i]);
 		}
 		return map;
 	}
-    
+   
 }

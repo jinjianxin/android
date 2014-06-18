@@ -8,7 +8,14 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="button"
+		android:text="button1"
+        />
+    
+     <Button 
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="button2"
         />
     
 </LinearLayout>

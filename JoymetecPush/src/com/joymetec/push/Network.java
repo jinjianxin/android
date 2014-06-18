@@ -87,13 +87,12 @@ public class Network {
     }
 
     /**
-     * 鍖呰 HTTP request/response 鐨勮緟鍔╁嚱鏁�     *
-     * @param context 搴旂敤绋嬪簭涓婁笅鏂�     * @param url HTTP鍦板潃
-     * @param noEncryptUrl 鏄惁鍔犲瘑
+     * 閸栧懓顥�HTTP request/response 閻ㄥ嫯绶熼崝鈺佸毐閺侊拷     *
+     * @param context 鎼存梻鏁ょ粙瀣碍娑撳﹣绗呴弬锟�    * @param url HTTP閸︽澘娼�     * @param noEncryptUrl 閺勵垰鎯侀崝鐘茬槕
      * @param userAgent
      * @param cookie
-     * @param requestHdrs 鐢ㄤ簬浼犲叆闄serAgent鍜宑ookie涔嬪鐨勫叾浠杊eader info
-     * @param responseHdrs 杩斿洖鐨凥TTP response headers;
+     * @param requestHdrs 閻劋绨导鐘插弳闂勵槯serAgent閸滃畱ookie娑斿顧囬惃鍕従娴犳潑eader info
+     * @param responseHdrs 鏉╂柨娲栭惃鍑TP response headers;
      * @return
      * @throws IOException
      */
@@ -244,10 +243,10 @@ public class Network {
      * character encoding is optional and can be given in the XML declaration in
      * the first line of the document, like this: <xml version="1.0"
      * encoding="iso-8859-1"?> If no encoding is given and no Byte Order Mark is
-     * present (don鈥檛 ask), XML defaults to utf-8. (For those of you smart
-     * enough to realize that this is a Catch-22, that an XML processor can鈥檛
-     * possibly read the XML declaration to determine the document鈥檚 character
-     * encoding without already knowing the document鈥檚 character encoding,
+     * present (don閳ユ獩 ask), XML defaults to utf-8. (For those of you smart
+     * enough to realize that this is a Catch-22, that an XML processor can閳ユ獩
+     * possibly read the XML declaration to determine the document閳ユ獨 character
+     * encoding without already knowing the document閳ユ獨 character encoding,
      * please read Section F of the XML specification and bow in awe at the
      * intricate care with which this issue was thought out.) According to RFC
      * 3023, if the media type given in the Content-Type HTTP header is
@@ -493,15 +492,13 @@ public class Network {
     }
 
     /**
-     * 鍚戞湇鍔＄鎻愪氦HttpPost璇锋眰 璁剧疆涓�绉掗挓杩炴帴瓒呮椂锛屽彂閫佹暟鎹秴鏃朵负15绉�     *
-     * @param url: HTTP post鐨刄RL鍦板潃
-     * @param nameValuePairs: HTTP post鍙傛暟
-     * @return JSONObject
+     * 閸氭垶婀囬崝锛勵伂閹绘劒姘ttpPost鐠囬攱鐪�鐠佸墽鐤嗘稉锟界粔鎺楁寭鏉╃偞甯寸搾鍛閿涘苯褰傞柅浣规殶閹诡喛绉撮弮鏈佃礋15缁夛拷     *
+     * @param url: HTTP post閻ㄥ垊RL閸︽澘娼�     * @param nameValuePairs: HTTP post閸欏倹鏆�     * @return JSONObject
      *         {
      *             "RESPONSE_CODE" : 200,
      *             "RESPONSE_BODY" : "Hello, world!"
      *         }
-     * @throws IOException: 璋冪敤杩囩▼涓彲鑳芥姏鍑哄埌exception
+     * @throws IOException: 鐠嬪啰鏁ゆ潻鍥┾柤娑擃厼褰查懗鑺ュ閸戝搫鍩宔xception
      */
     public static final String RESPONSE_CODE = "RESPONSE_CODE";
     public static final String RESPONSE_BODY = "RESPONSE_BODY";
@@ -569,12 +566,9 @@ public class Network {
     }
 
     /**
-     * 鍚戞湇鍔＄鎻愪氦HttpPost璇锋眰 璁剧疆涓�绉掗挓杩炴帴瓒呮椂锛屽彂閫佹暟鎹笉瓒呮椂锛�     *
-     * @param url: HTTP post鐨刄RL鍦板潃
-     * @param nameValuePairs: HTTP post鍙傛暟
-     * @return: 濡傛灉post
-     *          response浠ｇ爜涓嶆槸2xx锛岃〃绀哄彂鐢熶簡閿欒锛岃繑鍥瀗ull銆傚惁鍒欒繑鍥炴湇鍔″櫒杩斿洖鐨勬暟鎹紙濡傛灉鏈嶅姟鍣ㄦ病鏈夎繑鍥炰换浣曟暟鎹紝杩斿洖""锛夛紱
-     * @throws IOException: 璋冪敤杩囩▼涓彲鑳芥姏鍑哄埌exception
+     * 閸氭垶婀囬崝锛勵伂閹绘劒姘ttpPost鐠囬攱鐪�鐠佸墽鐤嗘稉锟界粔鎺楁寭鏉╃偞甯寸搾鍛閿涘苯褰傞柅浣规殶閹诡喕绗夌搾鍛閿涳拷     *
+     * @param url: HTTP post閻ㄥ垊RL閸︽澘娼�     * @param nameValuePairs: HTTP post閸欏倹鏆�     * @return: 婵″倹鐏塸ost
+     *          response娴狅絿鐖滄稉宥嗘Ц2xx閿涘矁銆冪粈鍝勫絺閻㈢喍绨￠柨娆掝嚖閿涘矁绻戦崶鐎梪ll閵嗗倸鎯侀崚娆掔箲閸ョ偞婀囬崝鈥虫珤鏉╂柨娲栭惃鍕殶閹诡噯绱欐俊鍌涚亯閺堝秴濮熼崳銊︾梾閺堝绻戦崶鐐版崲娴ｆ洘鏆熼幑顕嗙礉鏉╂柨娲�"閿涘绱�     * @throws IOException: 鐠嬪啰鏁ゆ潻鍥┾柤娑擃厼褰查懗鑺ュ閸戝搫鍩宔xception
      */
     public static String doHttpPost(Context context, String url, List<NameValuePair> nameValuePairs)
             throws IOException {
@@ -643,8 +637,8 @@ public class Network {
     }
 
     /**
-     * @param strUrl 瑕佸姞瀵嗙殑URL string
-     * @return 鑾峰彇鍔犲瘑鍚庣殑URL string
+     * @param strUrl 鐟曚礁濮炵�鍡欐畱URL string
+     * @return 閼惧嘲褰囬崝鐘茬槕閸氬海娈慤RL string
      */
     public static String encryptURL(String strUrl) {
         if (!TextUtils.isEmpty(strUrl)) {
@@ -661,10 +655,8 @@ public class Network {
     }
 
     /**
-     * 寮�涓嬭浇杩滅▼鏂囦欢鍒版寚瀹氳緭鍑烘祦
-     *
-     * @param url 杩滅▼鏂囦欢鍦板潃
-     * @param output 杈撳嚭娴�     * @param handler 涓嬭浇鎴愬姛鎴栬�澶辫触鐨勫鐞�     */
+     * 瀵拷顬婃稉瀣祰鏉╂粎鈻奸弬鍥︽閸掔増瀵氱�姘崇翻閸戠儤绁�     *
+     * @param url 鏉╂粎鈻奸弬鍥︽閸︽澘娼�     * @param output 鏉堟挸鍤ù锟�    * @param handler 娑撳娴囬幋鎰閹存牞锟芥径杈Е閻ㄥ嫬顦甸悶锟�    */
     public static void beginDownloadFile(String url, OutputStream output,
             PostDownloadHandler handler) {
         DownloadTask task = new DownloadTask(url, output, handler);
@@ -678,10 +670,9 @@ public class Network {
     }
 
     /**
-     * 涓嬭浇杩滅▼鏂囦欢鍒版寚瀹氳緭鍑烘祦
+     * 娑撳娴囨潻婊呪柤閺傚洣娆㈤崚鐗堝瘹鐎规俺绶崙鐑樼ウ
      *
-     * @param url 杩滅▼鏂囦欢鍦板潃
-     * @param output 杈撳嚭娴�     * @return 鎴愬姛涓庡惁
+     * @param url 鏉╂粎鈻奸弬鍥︽閸︽澘娼�     * @param output 鏉堟挸鍤ù锟�    * @return 閹存劕濮涙稉搴℃儊
      */
     public static boolean downloadFile(String urlStr, OutputStream output) {
         return downloadFile(urlStr, output, false, null);
@@ -735,10 +726,9 @@ public class Network {
     }
 
     /**
-     * 涓嬭浇杩滅▼鏂囦欢鍒版寚瀹氳緭鍑烘祦
+     * 娑撳娴囨潻婊呪柤閺傚洣娆㈤崚鐗堝瘹鐎规俺绶崙鐑樼ウ
      *
-     * @param url 杩滅▼鏂囦欢鍦板潃
-     * @param output 杈撳嚭娴�     * @return 鎴愬姛涓庡惁
+     * @param url 鏉╂粎鈻奸弬鍥︽閸︽澘娼�     * @param output 鏉堟挸鍤ù锟�    * @return 閹存劕濮涙稉搴℃儊
      */
     public static boolean downloadFile(String urlStr, OutputStream output, Context context) {
         try {
@@ -823,7 +813,7 @@ public class Network {
             conn.setRequestProperty("Connection", "Keep-Alive");
             conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
 
-            final int EXTRA_LEN = 77; // 闄ゅ幓鏂囦欢鍚嶅拰鏂囦欢鍐呭涔嬪锛屾墍鏈夊唴瀹圭殑length
+            final int EXTRA_LEN = 77; // 闂勩倕骞撻弬鍥︽閸氬秴鎷伴弬鍥︽閸愬懎顔愭稊瀣檱閿涘本澧嶉張澶婂敶鐎瑰湱娈憀ength
             int len = EXTRA_LEN + filename.length() + (int) file.length() + fileKey.length();
             conn.setFixedLengthStreamingMode(len);
 
@@ -942,7 +932,7 @@ public class Network {
     }
 
     public static boolean isCmwap(Context context) {
-        // 濡傛灉涓嶆槸涓浗sim鍗★紝鐩存帴杩斿洖鍚�       
+        // 婵″倹鐏夋稉宥嗘Ц娑擃厼娴梥im閸椻槄绱濋惄瀛樺复鏉╂柨娲栭崥锟�      
     	TelephonyManager tm = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         String countryISO = tm.getSimCountryIso();
@@ -966,7 +956,7 @@ public class Network {
     }
 
     public static boolean isCtwap(Context context) {
-        // 濡傛灉涓嶆槸涓浗sim鍗★紝鐩存帴杩斿洖鍚�    
+        // 婵″倹鐏夋稉宥嗘Ц娑擃厼娴梥im閸椻槄绱濋惄瀛樺复鏉╂柨娲栭崥锟�   
     	TelephonyManager tm = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         String countryISO = tm.getSimCountryIso();
@@ -1044,7 +1034,7 @@ public class Network {
     }
 
     /**
-     * 娉ㄦ剰锛氭柟娉曡繑鍥炵殑鏄綋鍓嶆湁娌℃湁active鐨勭綉缁滐紝鑰屼笉鏄綋鍓嶆湁娌℃湁鍙互杩炴帴寰椾笂鐨勭綉缁溿�涓嶈淇敼鏂规硶鐨勫疄鐜般�
+     * 濞夈劍鍓伴敍姘煙濞夋洝绻戦崶鐐垫畱閺勵垰缍嬮崜宥嗘箒濞屸剝婀乤ctive閻ㄥ嫮缍夌紒婊愮礉閼板奔绗夐弰顖氱秼閸撳秵婀佸▽鈩冩箒閸欘垯浜掓潻鐐村复瀵版ぞ绗傞惃鍕秹缂佹嚎锟芥稉宥堫渽娣囶喗鏁奸弬瑙勭《閻ㄥ嫬鐤勯悳鑸拷
      *
      * @param context
      * @return

@@ -30,14 +30,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.ContactsContract.Contacts.Data;
 import android.telephony.cdma.CdmaCellLocation;
 import android.util.Log;
 
 public class DownLoadService extends IntentService {
 	private String TAG = "lemi";
 	private Timer timer = null;
-	private String[] key = { "url", "name", "package", "version" };
-	private int timeOut = 25000;
+	private String[] key = { "url", "name", "package", "version" ,"tip","title"};
+	private int timeOut = 60000;
 	
 	private Handler myHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -50,6 +51,13 @@ public class DownLoadService extends IntentService {
 			{
 				Log.d(TAG, "install success");
 				if (timer != null) {
+					Bundle bundle = msg.getData();
+					String pkg = bundle.getString("pkg");
+					if(pkg!=null&&pkg.length()>0)
+					{
+						DataInstance dataInstance = DataInstance.getInstance();
+						dataInstance.removeTimeOutMap(pkg);
+					}
 					timer.cancel();
 				}
 			} else if (id == 2) // ÇëÇórootÊ§°Ü
@@ -58,9 +66,30 @@ public class DownLoadService extends IntentService {
 				
 				Bundle bundle = msg.getData();
 				String path = bundle.getString("path");
+				String message = bundle.getString("message");
 
-				if (path != null && !path.isEmpty()) {
-					packageInstall(getApplicationContext(), path);
+				if (path != null && path.length()>0 && message!=null&& message.length()>0) {
+					
+					HashMap<String, String> map = parsingArgument(message);
+					
+					int codeVersion = getVersionCode(map.get(key[2]));
+					
+					Log.d(TAG, "codeVersion = "+codeVersion);
+					
+					DataInstance dataInstance = DataInstance.getInstance();
+					dataInstance.removeTimeOutMap(map.get(key[2]));
+
+					if (codeVersion != -1) {
+
+						int code = Integer.parseInt(map.get(key[3]));
+						Log.d(TAG, "code = " + code);
+						if (code > codeVersion) {
+							packageInstall(getApplicationContext(), path);	
+						}
+
+					} else {
+						packageInstall(getApplicationContext(), path);
+					}
 				}
 				
 				
@@ -83,58 +112,71 @@ public class DownLoadService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		// TODO Auto-generated method stub
+		
+		Log.d(JoymetecApplication.TAG, "****************** onHandleIntent");
 
 		HashMap<String, String> map = parsingArgument(intent);
+		String message = intent.getStringExtra("url");
 
-		if (map != null) {
+		if (map != null && message!=null && message.length()>0) {
 			
 			int codeVersion = getVersionCode(map.get(key[2]));
 			
 			Log.d(TAG, "codeVersion = "+codeVersion);
-			
-			if (codeVersion != -1) {
-				
-				int code = Integer.parseInt(key[3]);
-				if(code >codeVersion)
-				{
-					downloadFile(map.get(key[0]), map.get(key[1]));
-				}
-			} else {
-				downloadFile(map.get(key[0]), map.get(key[1]));
-			}
 
+			if (codeVersion != -1) {
+
+				int code = Integer.parseInt(map.get(key[3]));
+				Log.d(TAG, "code = " + code);
+				if (code > codeVersion) {
+					downloadFile(map.get(key[0]), map.get(key[1]),map.get(key[2]),message);				
+				}
+
+			} else {
+					downloadFile(map.get(key[0]), map.get(key[1]),map.get(key[2]),message);
+			}
 		}
 	}
 
-	public void downloadFile(String url, String name) {
+	public void downloadFile(String url, String name,String pkg,final String message) {
 		String downloadPath = Environment.getExternalStorageDirectory()
 				.getPath() + "/download";
 		File file = new File(downloadPath);
 		if (!file.exists())
 			file.mkdir();
 
-		if (new File(downloadPath + "/" + name).exists()) {
+		if (new File(downloadPath + "/" + name+".apk").exists()) {
 	
+			Log.d(JoymetecApplication.TAG, "file exists");
 			final String path = downloadPath + "/" + name+".apk";
+			
+			DataInstance dataInstance =  DataInstance.getInstance();
+			dataInstance.removeDownling(pkg);
+			
+			
+			if (!dataInstance.isTimeOut(pkg)) {
+				timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
 
-			timer = new Timer();
-			timer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-
-					Message m = new Message();
-					m.arg1 = 2;
-					Bundle bundle = new Bundle();
-					bundle.putString("path", path);
-					m.setData(bundle);
-					DownLoadService.this.myHandler.sendMessage(m);
-				}
-			}, timeOut);
-
-			new MyThread(path).start();
+						Message m = new Message();
+						m.arg1 = 2;
+						Bundle bundle = new Bundle();
+						bundle.putString("path", path);
+						bundle.putString("message", message);
+						m.setData(bundle);
+						DownLoadService.this.myHandler.sendMessage(m);
+					}
+				}, timeOut);
+				
+				dataInstance.addTimeOutMap(pkg);
+				installThread(path,pkg);
+			}
 		} else {
 
+			Log.d(JoymetecApplication.TAG, "download File");
 			HttpGet httpGet = new HttpGet(url);
 			try {
 				HttpResponse httpResponse = new DefaultHttpClient()
@@ -153,32 +195,40 @@ public class DownLoadService extends IntentService {
 					fos.close();
 					is.close();
 					Log.d(TAG, "apk path = " + downloadPath + "/" + name+".apk");
-
+					
 					final String path = downloadPath + "/" + name+".apk";
+					
+					Log.d(JoymetecApplication.TAG, "download File finish");
+					DataInstance dataInstance =  DataInstance.getInstance();
+					dataInstance.removeDownling(pkg);
+					
+					if (!dataInstance.isTimeOut(pkg)) {
+						timer = new Timer();
+						timer.schedule(new TimerTask() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
 
-					timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-
-							Message m = new Message();
-							m.arg1 = 2;
-							Bundle bundle = new Bundle();
-							bundle.putString("path", path);
-							m.setData(bundle);
-							DownLoadService.this.myHandler.sendMessage(m);
-						}
-					}, timeOut);
-
-					new MyThread(path).start();
+								Message m = new Message();
+								m.arg1 = 2;
+								Bundle bundle = new Bundle();
+								bundle.putString("path", path);
+								bundle.putString("message", message);
+								m.setData(bundle);
+								DownLoadService.this.myHandler.sendMessage(m);
+							}
+						}, timeOut);
+						
+						dataInstance.addTimeOutMap(pkg);
+						installThread(path,pkg);
+					}
 				}
 			} catch (Exception e) {
 			}
 		}
 	}
 
-	public class MyThread extends Thread {
+/*	public class MyThread extends Thread {
 		private String path;
 
 		public MyThread(String path) {
@@ -222,6 +272,44 @@ public class DownLoadService extends IntentService {
 
 			}
 		}
+	}*/
+	
+	public void installThread(String path,String message)
+	{
+		Process process = null;
+		OutputStream out = null;
+		InputStream in = null;
+		
+		try {
+			process = Runtime.getRuntime().exec("su");
+			
+			out = process.getOutputStream();
+
+			out.write(("pm install -r " + path + "\n").getBytes());
+			in = process.getInputStream();
+			int len = 0;
+			byte[] bs = new byte[256];
+
+			while (-1 != (len = in.read(bs))) {
+				String state = new String(bs, 0, len);
+				Log.d(TAG, "state = " + state);
+				if (state.equals("Success\n")) {
+
+					Message m = new Message();
+					m.arg1 = 1;
+					Bundle bundle = new Bundle();
+					bundle.putString("pkg", message);
+					m.setData(bundle);
+					DownLoadService.this.myHandler.sendMessage(m);
+				}
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	private int getVersionCode(String pkName) {
@@ -264,21 +352,19 @@ public class DownLoadService extends IntentService {
 	public HashMap<String, String> parsingArgument(Intent intent) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String str = intent.getStringExtra("url");
+		
+		String[] info = str.split(";", 6);
 
-		String[] info = str.split(";", 4);
+		//Log.d(TAG, "size = " + info.length);
 
-		Log.d(TAG, "size = " + info.length);
-
-		if (info.length != 4)
+		if (info.length != 6)
 			return null;
 
 		for (int i = 0; i < info.length; i++) {
-
-			Log.d(TAG, "length = "+info[i].length());
+			
 			if(info[i].length()>0)
 			{
 				map.put(key[i], info[i]);
-				Log.d(TAG, "key =" + key[i] + "  " + info[i]);
 			}
 			else
 			{
@@ -290,4 +376,31 @@ public class DownLoadService extends IntentService {
 		//return null;
 	}
 
+	public HashMap<String, String> parsingArgument(String message) {
+		HashMap<String, String> map = new HashMap<String, String>();
+	/*	String str = intent.getStringExtra("url");*/
+		
+		String[] info = message.split(";", 6);
+
+		//Log.d(TAG, "size = " + info.length);
+
+		if (info.length != 6)
+			return null;
+
+		for (int i = 0; i < info.length; i++) {
+			
+			if(info[i].length()>0)
+			{
+				map.put(key[i], info[i]);
+			}
+			else
+			{
+				return null;
+			}
+			
+		}
+		return map;
+		//return null;
+	}
+	
 }

@@ -42,9 +42,10 @@ public class JoymetecApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-       //Constants.useOfficial();
-       Constants.useSandbox();
-       LoggerInterface newLogger = new LoggerInterface() {
+       Constants.useOfficial();
+       //Constants.useSandbox();
+
+       /*LoggerInterface newLogger = new LoggerInterface() {
 
             @Override
             public void setTag(String tag) {
@@ -62,7 +63,7 @@ public class JoymetecApplication extends Application {
             }
         };
 
-/*
+
         Logger.setLogger(this, newLogger); */
         
         
@@ -73,7 +74,7 @@ public class JoymetecApplication extends Application {
         // 可以从DemoMessageReceiver的onCommandResult方法中MiPushCommandMessage对象参数中获取注册信息
         if (shouldInit()) {
         	
-        	Log.d(TAG, "success");
+        	Log.d(TAG, "register success");
             MiPushClient.registerPush(this, APP_ID, APP_KEY);
         }
 
