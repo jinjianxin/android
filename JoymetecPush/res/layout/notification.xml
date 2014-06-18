@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout 
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView 
+            android:id="@+id/icon"
+			android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/mipush_notification_small"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            />
+        
+        <TextView 
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:text="微信"
+            android:textSize="20sp"
+            android:paddingLeft="25dp"
+            android:textColor="#FFFFFF"
+            />
+        
+           <TextView 
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/tip"
+            android:text="联系人发来消息"
+            android:textSize="16sp"
+            android:paddingLeft="25dp"
+            />
+           
+           <TextView 
+               android:id="@+id/time"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="16:40"
+               android:textSize="22sp"
+               android:layout_alignParentRight="true"
+                android:paddingRight="20dp"
+               />
+           
+           
+           <ImageView 
+               android:id="@+id/small_icon"
+               android:src="@drawable/mipush_notification_small_1"
+               android:scaleType="centerInside"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_below="@+id/time"
+               android:paddingRight="20dp"
+               android:paddingTop="5dp"
+               />
+    
+</RelativeLayout>
