@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+<!--     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        
+        <EditText 
+            android:id="@+id/stats_search_edit_text"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:hint="test"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            />
+        
+        <Button
+            android:id="@+id/stats_search_button"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_marginRight="10dp"
+            />
+        
+    </LinearLayout> -->
+
+    <LinearLayout
+        android:id="@+id/stats_linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:background="#FFFFFF" >
+
+        <TextView
+            android:id="@+id/stats_month_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="本月"
+            android:textColor="#000000"
+            android:textSize="20.0dip" />
+
+        <TextView
+            android:id="@+id/stats_quarter_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20.0dip" 
+            android:text="本季度"
+            />
+
+        <TextView
+            android:id="@+id/stats_year_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20.0dip" 
+            android:text="本年"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ststs_cursor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+        android:src="@drawable/cursor" 
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:background="#000000"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+</LinearLayout>

@@ -1,0 +1,292 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <TextView
+        android:id="@+id/income_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/income_title"
+        android:textColor="@color/textColor"
+        android:textSize="20sp" 
+        android:layout_marginTop="20dp"
+        />
+    
+    
+    <View 
+        android:id="@+id/income_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"
+        android:layout_below="@id/income_title"
+        android:layout_marginTop="10dp"
+        />
+    
+    <LinearLayout
+        android:id="@+id/income_linear_layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_divider"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+		<TextView 
+		    android:id="@+id/income_kind_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_kind"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+		
+		         <LinearLayout 
+            android:id="@+id/income_kind_spinner_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="#CDC9C9"
+            >
+            
+            <TextView 
+                android:id="@+id/income_kind_spinner_text_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center|center_horizontal"
+                android:layout_weight="1"
+                android:textSize="20sp"
+            	android:text="@string/add_dialog_hint"
+            	android:textColor="#000000"
+                />
+            
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#363636" 
+                />
+            
+             <Button
+                android:id="@+id/income_kind_spinner_select_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="3" 
+                android:background="@drawable/exhibition_arrow"
+                /> 
+        </LinearLayout> 
+		
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:id="@+id/income_linear_layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout1"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+		<TextView 
+		    android:id="@+id/income_number_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_number"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+		
+		<EditText 
+		    android:id="@+id/income_number_editText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:singleLine="true"
+		    android:inputType="numberDecimal"
+		    android:layout_marginRight="20dp"
+		    />
+		
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:id="@+id/income_linear_layout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout2"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+ 		<TextView 
+		    android:id="@+id/income_unit_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_unit"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+ 		
+ 				         <LinearLayout 
+            android:id="@+id/income_unit_spinner_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="#CDC9C9"
+            >
+            
+            <TextView 
+                android:id="@+id/income_unit_spinner_text_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center|center_horizontal"
+                android:layout_weight="1"
+                android:textSize="20sp"
+            	android:text="@string/add_dialog_hint"
+            	android:textColor="#000000"
+                />
+            
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#363636" 
+                />
+            
+             <Button
+                android:id="@+id/income_unit_spinner_select_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="3" 
+                android:background="@drawable/exhibition_arrow"
+                /> 
+        </LinearLayout> 
+ 		
+ 	<!-- 			<Spinner
+		    android:id="@+id/income_unit_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:layout_marginRight="20dp"
+		    /> -->
+ 		
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/income_linear_layout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout3"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+    		<TextView 
+		    android:id="@+id/income_date_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_date"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+
+    		
+    		<EditText 
+		    android:id="@+id/income_date_editText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:singleLine="true"
+		    android:layout_marginRight="20dp"
+		    android:layout_weight="1"
+		    android:editable="false"
+		    />
+
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/income_linear_layout5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout4"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+  		<TextView 
+		    android:id="@+id/income_unitprice_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_unitprice"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+  		
+  				<EditText 
+		    android:id="@+id/income_unitprice_editText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:singleLine="true"
+		    android:inputType="numberDecimal"
+		    android:layout_marginRight="20dp"
+		    android:layout_weight="1"
+		    />
+        
+  		
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/income_linear_layout6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout5"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+		<TextView 
+		    android:id="@+id/income_count_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/income_count"
+		    android:textColor="@color/textColor"
+		    android:textSize="20sp"
+		    android:layout_marginLeft="50dp"
+		    android:layout_weight="1"
+		    />
+		
+		  	<TextView 
+		    android:id="@+id/income_count_edittext"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:singleLine="true"
+		    android:layout_marginRight="20dp"
+		    android:layout_weight="1"
+		    android:textColor="@color/textColor"
+           	android:textSize="20sp"
+           	android:text="@string/income_count_unit"
+		    />
+	
+    </LinearLayout>
+    
+
+    <Button 
+        android:id="@+id/income_sure_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/income_linear_layout6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/income_sure"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        />
+    
+    
+</RelativeLayout>

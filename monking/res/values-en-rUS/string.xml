@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="main_income" >Income</string>
+    <string name="main_spending">Spending</string>
+    <string name="main_count">Count</string>
+    <string name="main_detail">Detail</string>
+    <string name="main_setting">Setting</string>
+    <string name="main_income_text">IncomeCount:</string>
+    <string name="main_spending_text">SpendingCount:</string>
+    <string name="main_profit">Profit:</string>
+     <string name="main_loss">Loss:</string>
+    <string name="main_search">Search</string>
+    
+    <string name="main_unit">%s$</string>
+    <string name="main_unit_count">%s</string>
+    
+    <string name="income_title">Income</string>
+    <string name="income_kind">Kind</string>
+    <string name="income_number">Number</string>
+    <string name="income_unit">Unit</string>
+    <string name="income_date">Date</string>
+    <string name="income_unitprice">Unit Price</string>
+    <string name="income_count">Count</string>
+    <string name="income_count_unit">%s$</string>
+    <string name="income_sure">Sure</string>
+    
+    <string name="spending_title">Spending</string>
+    <string name="input_error">Error</string>
+    
+    <string name="stats_month_title">Month</string>
+    <string name="stats_month_income">Income</string>
+    <string name="stats_month_income_count">Count</string>
+    <string name="stats_month_spending">Spending</string>
+    <string name="stats_month_spending_count">Count</string>
+   
+   	<string name="stats_profit">Profit:</string>
+   	<string name="stats_loss">Loss:</string>
+   	   	    
+    <string name="stats_quarter_title">Quarter</string>
+    <string name="stats_quarter_income">Income</string>
+    <string name="stats_quarter_income_count">Count</string>
+    <string name="stats_quarter_spending">Spending</string>
+    <string name="stats_quarter_spending_count">Count</string>
+
+    <string name="stats_year_title">Year</string>
+    <string name="stats_year_income">Income</string>
+    <string name="stats_year_income_count">Count</string>
+    <string name="stats_year_spending">Spending</string>
+    <string name="stats_year_spending_count">Count</string>
+    
+    <string name="detail_start_text">StartTime</string>
+    <string name="detail_end_text">EndTime</string>
+    <string name="detail_search">Search</string>
+    <string name="detail_prev">Previous Month</string>
+    <string name="detail_next">Next Month</string>
+    
+    
+    
+ </resources>

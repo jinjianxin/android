@@ -1,0 +1,20 @@
+<PreferenceScreen 
+    android:title="设置"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+         
+    <PreferenceScreen android:title="首页数据显示" android:summary="首页显示那个时间段数据" android:key="setting_show" >                                              
+    </PreferenceScreen>  
+        
+    <PreferenceScreen android:title="备份数据" android:summary="定时将数据备份至SD卡" android:key="setting_backup" >
+    </PreferenceScreen>
+    
+    <CheckBoxPreference android:key="setting_locked" android:title="开启锁定" 
+        android:summary="设置加密方式" android:defaultValue="false"/>
+    
+    <CheckBoxPreference android:key="setting_intranet" android:title="启用联网"
+        android:summary="是否启用网络" android:defaultValue="false"/>
+    
+    <CheckBoxPreference android:key="setting_backup_sdcard" android:title="备份至SD卡"
+        android:summary="备份数据到SD卡" android:defaultValue="false" />
+    
+</PreferenceScreen>

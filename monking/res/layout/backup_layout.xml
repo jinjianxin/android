@@ -1,0 +1,45 @@
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <TextView 
+        android:id="@+id/backup_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="70dip"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:text="		备份数据"
+        android:background="@drawable/text_view"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        />
+    
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"
+        />
+    
+    <TextView 
+        android:id="@+id/recover_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="70dip"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:text="		恢复数据"
+        android:background="@drawable/text_view"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        />
+    
+        <View 
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"
+        />
+    
+</LinearLayout>
