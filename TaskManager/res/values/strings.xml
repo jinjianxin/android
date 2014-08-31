@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TaskManager</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <color name="textColor">#000000</color>
+    
+    <string name="main_income" >收入</string>
+    <string name="main_spending">支出</string>
+    <string name="main_count">统计</string>
+    <string name="main_detail">明细</string>
+    <string name="main_setting">设置</string>
+    
+    <string name="main_income_text">收入总计：</string>
+    <string name="main_spending_text">支出总计：</string>
+    <string name="main_profit">盈利：</string>
+    <string name="main_loss">亏损：</string>
+    <string name="main_search">查询</string>
+    
+    <string name="main_unit">%s元</string>
+    <string name="main_unit_count">%s笔</string>
+    
+    <string name="income_title">增加新任务</string>
+     <string name="income_title_new">任务详情</string>
+    <string name="income_kind">任务优先级</string>
+    <string name="income_number">任务描述</string>
+    <string name="income_unit">计划时间</string>
+    <string name="income_date">开始日期</string>
+    <string name="income_end_date">结束日期</string>
+    <string name="income_unitprice">单价</string>
+    <string name="income_count">总价</string>
+    <string name="income_count_unit">%s元</string>
+    <string name="income_sure">确定</string>
+  
+    <string name="spending_title">支出</string>
+    <string name="input_error">输入错误，请重新输入</string>
+    
+    <string name="stats_month_title">本月</string>
+    <string name="stats_month_income">本月收入：</string>
+    <string name="stats_month_income_count">收入笔数：</string>
+    <string name="stats_month_spending">本月支出：</string>
+    <string name="stats_month_spending_count">支出笔数：</string>
+   	<string name="stats_month_profit">本月盈利：</string>
+   	<string name="stats_month_loss">本月亏损：</string>
+   	
+   	<string name="stats_quarter_title">本季度</string>
+    <string name="stats_quarter_income">本季度收入：</string>
+    <string name="stats_quarter_income_count">收入笔数：</string>
+    <string name="stats_quarter_spending">本季度支出：</string>
+    <string name="stats_quarter_spending_count">支出笔数：</string>
+    <string name="stats_quarter_profit">本季度盈利：</string>
+   	<string name="stats_quarter_loss">本季度亏损：</string>
+    
+    <string name="stats_year_title">本年</string>
+    <string name="stats_year_income">本年收入：</string>
+    <string name="stats_year_income_count">收入笔数：</string>
+    <string name="stats_year_spending">本年支出：</string>
+    <string name="stats_year_spending_count">支出笔数：</string>
+    <string name="stats_year_profit">本年盈利：</string>
+   	<string name="stats_year_loss">本年亏损：</string>
+   	
+   	<string name="add_dialog_title">增加种类</string>
+	<string name="add_dialog_hint">新增种类</string>
+	<string name="add_dialog_sure">确定</string>
+	<string name="add_dialog_cancel">取消</string>
+	
+	<string name="add_unit_title"></string>
+	
+	<string name="detail_start_text">开始时间</string>
+    <string name="detail_end_text">结束时间</string>
+    <string name="detail_search">搜索</string>
+	<string name="detail_prev">上个月</string>
+    <string name="detail_next">下个月</string>
+    
+    <string name="taskPriority" >任务优先级</string>
+    <string name="taskDes">任务描述</string>
+    <string name="taskDate">开始时间</string>
+
+</resources>

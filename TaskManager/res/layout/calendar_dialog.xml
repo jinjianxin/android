@@ -1,0 +1,39 @@
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+	<com.example.view.CalendarView
+	    android:id="@+id/calendar_dialog_calendar_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+	    />
+   
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+        
+        <Button 
+            android:id="@+id/calendar_dialog_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_prev"
+            android:layout_marginLeft="50dp"
+            />
+        
+        <Button 
+             android:id="@+id/calendar_dialog_next"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/detail_next"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="50dp"
+            />
+        
+        
+    </RelativeLayout>
+    
+</LinearLayout>
